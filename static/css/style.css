@@ -1,0 +1,63 @@
+.user-link {
+    text-decoration: none;
+}
+
+.default-btn {
+    color: #333;
+}
+
+.post-text {
+    padding-top: 0.5rem;
+}
+
+.post-img {
+    float: left;
+    margin-right: 1rem;
+}
+
+.post-image {
+    max-width: 100%;
+    height: auto;
+    border-radius: 10px;
+    margin-bottom: 10px;
+}
+
+.empty-text {
+    color: #777;
+    font-size: 1.5rem;
+    text-align: center;
+}
+
+.sent-message {
+    background-color: #d6cdcd;
+    border-radius: 30px;
+    padding: 10px 25px;
+    width: 30%;
+    float: right;
+}
+
+.receiver-message {
+    background-color: rgb(8, 92, 200);
+    color: #fff;
+    border-radius: 30px;
+    padding: 10px 25px;
+    width: 30%;
+}
+
+.message-image-1 {
+	border-radius: 20px;
+	max-width: 35%;
+	height: auto;
+    float: right;
+}
+
+.message-image-2 {
+	border-radius: 20px;
+	max-width: 35%;
+	height: auto;
+}
+
+
+.inbox-icon {
+	margin-right: 5px;
+}

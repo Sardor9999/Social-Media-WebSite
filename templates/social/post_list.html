@@ -1,0 +1,63 @@
+{% extends 'landing/base.html' %}
+{% load crispy_forms_tags %}
+
+{% block title %} Post List {% endblock %}
+
+{% block content %}
+    <div class="container">
+        <div class="row justify-content-center mt-3">
+            <div class="col-md-6 col-sm-12">
+                <h2 class="text-center">Add a new post !!!</h2>
+            </div>
+        </div>
+        <div class="row justify-content-center mt-3">
+            <div class="col-md-6 col-sm-12">
+                <form action="" method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    {{ form|crispy }}
+                    <div class="d-grid gap-2">
+                        <button type="submit" class="btn btn-primary mt-3">Submit</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        {% for post in posts %}
+            <div class="row justify-content-center mt-3">
+                <div class="col-md-6 col-sm-12 border-bottom">
+                    <div class="post-text">
+                        <a href="{% url 'profile' post.author.profile.pk %}">
+                            <img src="{{ post.author.profile.picture.url }}" class="rounded-circle post-img" height="30"
+                                 width="30">
+                        </a>
+                        <p><a href="{% url 'profile' post.author.profile.pk %}"
+                              class="text-primary user-link">@{{ post.author|title }}</a> - <i>
+                            {{ post.created_on|date:"d M Y H:i" }}</i></p>
+                    </div>
+                    <div class="position-relative">
+                        {% if post.image %}
+                            <img src="{{ post.image.url }}" class="post-image">
+                        {% endif %}
+                        <p>{{ post.body|truncatewords:50|linebreaks }}</p>
+                        <a href="{% url 'post-detail' post.pk %}" class="stretched-link"></a>
+                    </div>
+                    <div class="d-flex flex-row my-2">
+                        <form method="POST" action="{% url 'like' post.pk %}">
+                            {% csrf_token %}
+                            <input type="hidden" name="next" value="{{ request.path }}">
+                            <button class="btn btn-outline-success mx-2" type="submit">
+                                <i class="far fa-thumbs-up"> <span>{{ post.likes.all.count }}</span></i>
+                            </button>
+                        </form>
+                        <form method="POST" action="{% url 'dislike' post.pk %}">
+                            {% csrf_token %}
+                            <input type="hidden" name="next" value="{{ request.path }}">
+                            <button class="btn btn-outline-danger" type="submit">
+                                <i class="far fa-thumbs-down"> <span>{{ post.dislikes.all.count }}</span></i>
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}
